@@ -1,0 +1,6 @@
+apiVersion: v2
+name: backend
+description: A Helm chart for Call Of Duty database deployment
+type: application
+version: 0.0.1
+appVersion: "14.0-alpine3.14"

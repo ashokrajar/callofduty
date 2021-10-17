@@ -1,0 +1,9 @@
+apiVersion: v2
+name: callofduty
+description: A Helm chart for Call Of Duty App Kubernetes deployment
+type: application
+version: 0.0.1
+appVersion: "0.0.1"
+dependencies:
+  - name: backend
+    version: 0.0.1
