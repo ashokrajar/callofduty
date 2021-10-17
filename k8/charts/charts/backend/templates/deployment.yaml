@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: call-of-duty-db
+  labels:
+    app: call-of-duty
+    tier: postgres
+spec:
+  selector:
+    matchLabels:
+      app: call-of-duty
+      tier: postgres
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: call-of-duty
+        tier: postgres
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.dbPassword }}
+            - name: POSTGRES_DB
+              value: callofduty_{{ .Values.environment }}
+          ports:
+            - name: http
+              containerPort: 5432
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: 5432
+          readinessProbe:
+            tcpSocket:
+              port: 5432
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: call-of-duty-db-pv
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: call-of-duty-db-pv
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistentVolumeClaimName }}

@@ -4,10 +4,6 @@
 
 replicaCount: 3
 
-environment: production
-
-dbPassword: ""
-
 image:
   registry: docker.io
   repository: ashokrajar/callofduty
@@ -48,3 +44,10 @@ autoscaling:
   maxReplicas: 10
   targetCPUUtilizationPercentage: 70
   targetMemoryUtilizationPercentage: 80
+
+backend:
+  persistentVolumeClaimName: call-of-duty-db-pv-claim
+
+global:
+  environment: production
+  dbPassword: ""
