@@ -26,11 +26,11 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: GO_ENV
-              value: {{ .Values.environment }}
+              value: {{ .Values.global.environment }}
             - name: DATABASE_HOST
               value: call-of-duty-db
             - name: DATABASE_PASSWORD
-              value: {{ .Values.dbPassword }}
+              value: {{ .Values.global.dbPassword }}
           ports:
             - name: http
               containerPort: 3000

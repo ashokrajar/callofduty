@@ -4,8 +4,6 @@
 
 environment: production
 
-dbPassword: ""
-
 persistentVolumeClaimName: call-of-duty-db-pv-claim
 
 image:

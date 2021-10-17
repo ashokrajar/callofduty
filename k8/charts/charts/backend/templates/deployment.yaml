@@ -26,9 +26,9 @@ spec:
             - name: POSTGRES_USER
               value: postgres
             - name: POSTGRES_PASSWORD
-              value: {{ .Values.dbPassword }}
+              value: {{ .Values.global.dbPassword }}
             - name: POSTGRES_DB
-              value: callofduty_{{ .Values.environment }}
+              value: callofduty_{{ .Values.global.environment }}
           ports:
             - name: http
               containerPort: 5432
