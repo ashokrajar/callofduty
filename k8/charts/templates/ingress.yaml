@@ -10,7 +10,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: call-of-duty}}-ingress
+  name: call-of-duty-ingress
   labels:
     name: call-of-duty-ingress
   {{- with .Values.ingress.annotations }}

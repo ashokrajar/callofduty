@@ -10,7 +10,7 @@ persistentVolumeClaimName: call-of-duty-db-pv-claim
 
 image:
   registry: docker.io
-  repository: postgres:14.0-alpine3.14
+  repository: postgres
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
