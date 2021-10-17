@@ -1,37 +1,75 @@
-# Welcome to Buffalo!
+# Call Of Duty
 
-Thank you for choosing Buffalo for your web development needs.
+**Call Of Duty** is a simple SRE On-Call handover tool.
 
-## Database Setup
+## Quick Starter
 
-It looks like you chose to set up your application using a database! Fantastic!
+### Prerequisite
+- Docker
 
-The first thing you need to do is open up the "database.yml" file and edit it to use the correct usernames, passwords, hosts, etc... that are appropriate for your environment.
+```shell
+mkdir data
 
-You will also need to make sure that **you** start/install the database of your choice. Buffalo **won't** install and start it for you.
+export DB_PASSWORD="*********" # replace with your password of choice
 
-### Create Your Databases
+docker run --name callofduty-prod-db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=${DB_PASSWORD} -e POSTGRES_DB=callofduty_production -p 5432:5432 -v data:/var/lib/postgresql/data -d postgres:14.0-alpine3.14
 
+docker run --name callofduty-prod -e GO_ENV=production -e DATABASE_HOST=localhost -e DATABASE_PASSWORD=${DB_PASSWORD} -p 8080:3000 -d ashokrajar/callofduty:0.0.1 
 
+```
+Go to => [http://localhost:8080](http://localhost:8080)
 
-Ok, so you've edited the "database.yml" file and started your database, now Buffalo can create the databases in that file for you:
+### Running with Docker Compose
 
-	$ buffalo pop create -a
+```shell
+export GO_ENV="production"
+export APP_VERSION="0.0.1"
+export APP_DBPASS="******" # set your choice of DB password
 
-## Starting the Application
+git clone https://github.com/ashokrajar/callofduty.git && cd callofduty
+make run-in-docker
+```
+Go to => [http://localhost:8080](http://localhost:8080)
 
-Buffalo ships with a command that will watch your application and automatically rebuild the Go binary and any assets for you. To do that run the "buffalo dev" command:
+### Building and Running from Source
 
-	$ buffalo dev
+You will need a locally running PostgreSQL server.
 
-If you point your browser to [http://127.0.0.1:3000](http://127.0.0.1:3000) you should see a "Welcome to Buffalo!" page.
+```shell
+export GO_ENV="development"
+export DATABASE_HOST="locahost" # your database user
+export DATABASE_USER="postgres" # your database user
+export DATABASE_PASSWORD="******" # your database password
+git clone https://github.com/ashokrajar/callofduty.git && cd callofduty 
+make run
+```
+Go to => [http://localhost:3000](http://localhost:3000)
 
-**Congratulations!** You now have your Buffalo application up and running.
+## Local Development Getting Started
 
-## What Next?
+### Prerequisite
+- make
+- GoLang 1.17.x
+- Docker
+- Docker Compose
 
-We recommend you heading over to [http://gobuffalo.io](http://gobuffalo.io) and reviewing all of the great documentation there.
+### Running DevServer
 
-Good luck!
+Running a DevServer is useful as it applies and reloads the development webserver as you write code.
+
+Dependency : You will need a locally running PostgreSQL server.
+
+```shell
+export GO_ENV="development"
+export DATABASE_HOST="locahost" # your database user
+export DATABASE_USER="postgres" # your database user
+export DATABASE_PASSWORD="******" # your database password
+
+make run-devserver
+```
+
+## Deployment with K8
+
+**Work In Progress**
 
 [Powered by Buffalo](http://gobuffalo.io)
