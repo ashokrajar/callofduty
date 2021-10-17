@@ -22,7 +22,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DATABASE_HOST: 127.0.0.1
+      DATABASE_HOST: callofduty-db
       DATABASE_PASSWORD: ${APP_DBPASS}
       GO_ENV: ${GO_ENV}
     depends_on:
