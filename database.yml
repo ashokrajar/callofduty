@@ -1,14 +1,24 @@
 ---
 development:
   dialect: postgres
-  database: onduty_development
-  user: {{envOr "DEVELOPMENT_DATABASE_USER" "postgres"}}
-  password: {{envOr "DEVELOPMENT_DATABASE_PASWORD" "postgres"}}
-  host: {{envOr "DEVELOPMENT_DATABASE_HOST" "127.0.0.1"}}
-  pool: 5
+  database: callofduty_development
+  user: {{envOr "DATABASE_USER" "postgres"}}
+  password: {{envOr "DATABASE_PASSWORD" "postgres"}}
+  host: {{envOr "DATABASE_HOST" "127.0.0.1"}}
+  pool: {{envOr "DATABASE_CONN_POOL" "10"}}
 
 test:
-  url: {{envOr "TEST_DATABASE_URL" "postgres://postgres:postgres@127.0.0.1:5432/onduty_test?sslmode=disable"}}
+  dialect: postgres
+  database: callofduty_test
+  user: {{envOr "DATABASE_USER" "postgres"}}
+  password: {{envOr "DATABASE_PASSWORD" "postgres"}}
+  host: {{envOr "DATABASE_HOST" "127.0.0.1"}}
+  pool: {{envOr "DATABASE_CONN_POOL" "10"}}
 
 production:
-  url: {{envOr "DATABASE_URL" "postgres://postgres:postgres@127.0.0.1:5432/onduty_production?sslmode=disable"}}
+  dialect: postgres
+  database: callofduty_production
+  user: {{envOr "DATABASE_USER" "postgres"}}
+  password: {{envOr "DATABASE_PASSWORD" "postgres"}}
+  host: {{envOr "DATABASE_HOST" "127.0.0.1"}}
+  pool: {{envOr "DATABASE_CONN_POOL" "20"}}
