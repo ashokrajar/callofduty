@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: call-of-duty-db
+  labels:
+    app: call-of-duty
+    tier: postgres
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http

@@ -1,0 +1,26 @@
+# Default values for backend.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+environment: production
+
+persistentVolumeClaimName: call-of-duty-db-pv-claim
+
+image:
+  registry: docker.io
+  repository: postgres
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+service:
+  type: ClusterIP
+  port: 5432
+
+resources:
+   limits:
+     cpu: 2000m
+     memory: 2048Mi
+   requests:
+     cpu: 500m
+     memory: 256Mi

@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  callofduty-db:
+    container_name: callofduty-db
+    image: postgres:14.0-alpine3.14
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - callofdutydatavolume01:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${APP_DBPASS}
+      POSTGRES_DB: callofduty_${GO_ENV}
+
+  callofduty-web:
+    container_name: callofduty-web-app
+    image: ashokrajar/callofduty:${APP_VERSION}
+    build: .
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_HOST: callofduty-db
+      DATABASE_PASSWORD: ${APP_DBPASS}
+      GO_ENV: ${GO_ENV}
+    depends_on:
+      - callofduty-db
+
+volumes:
+  callofdutydatavolume01:
