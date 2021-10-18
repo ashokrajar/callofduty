@@ -2,6 +2,13 @@
 
 **Call Of Duty** is a simple SRE On-Call handover tool.
 
+Tools is written using [Buffalo](http://gobuffalo.io) as rapid web development framework for Golang. Tools offer a 
+simple interface for on-Call handover.
+
+Pictures speak a thousand words.
+
+![Sample UI](assets/images/homepage.png)
+
 ## Quick Starter
 
 ### Prerequisite
