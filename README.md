@@ -70,6 +70,17 @@ make run-devserver
 
 ## Deployment with K8
 
-**Work In Progress**
+### Prerequisite
+- A Persistent Volume Claim
+
+```shell
+helm install \
+  call-of-duty ./charts \
+  --namespace hungerstation \
+  --create-namespace \
+  --version 0.0.1 \
+  --set global.dbPassword=postgres \
+  --set persistentVolumeClaimName=<persistentVolumeClaimName> 
+```
 
 [Powered by Buffalo](http://gobuffalo.io)
